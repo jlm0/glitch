@@ -1,0 +1,30 @@
+.scanline-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-size: 100% 4px;
+}
+
+.scanline-white {
+  background: linear-gradient(
+    to bottom, 
+    transparent 50%, 
+    rgba(255, 255, 255, 1) 50%
+  );
+}
+
+.scanline-green {
+  background: linear-gradient(
+    to bottom, 
+    transparent 50%, 
+    rgba(0, 255, 0, 1) 50%
+  );
+}
+
+.scanline-blue {
+  background: linear-gradient(
+    to bottom, 
+    transparent 50%, 
+    rgba(0, 255, 255, 1) 50%
+  );
+}
