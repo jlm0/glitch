@@ -84,7 +84,7 @@ export function CommunitySidebar() {
   return (
     <SidebarProvider>
       <Sidebar
-        className="relative z-20 w-20 bg-black/80 backdrop-blur-sm border-r border-gray-800/30"
+        className="relative z-20 w-20 shrink-0 bg-black/80 backdrop-blur-sm border-r border-gray-800/30"
         collapsible={false}
       >
         <SidebarHeader className="p-0">
