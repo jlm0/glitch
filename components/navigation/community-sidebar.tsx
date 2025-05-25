@@ -73,9 +73,7 @@ export function CommunitySidebar() {
   const activeCommunityId = pathname.split("/")[2]
 
   return (
-    <div
-      className="relative z-20 h-full w-20 bg-black/80 backdrop-blur-sm border-r border-gray-800/30 flex flex-col items-center overflow-visible"
-    >
+    <div className="relative z-20 h-full w-20 bg-black/80 backdrop-blur-sm border-r border-gray-800/30 flex flex-col items-center overflow-visible">
       {/* Community actions */}
       <div className="w-full py-3 flex flex-col items-center gap-2 border-b border-gray-800/30">
         {/* Add community button */}
@@ -143,11 +141,11 @@ export function CommunitySidebar() {
 
                 {/* Tooltip on hover - positioned in a fixed container */}
                 <div
-    className={cn(
-      "fixed left-20 ml-4 top-auto bg-black/90 backdrop-blur-sm border border-gray-800/50 px-2 py-1 rounded-sm text-xs",
-      "z-30 opacity-0 invisible translate-x-2 transition-all duration-300 whitespace-nowrap",
-      "group-hover:opacity-100 group-hover:visible group-hover:translate-x-0",
-    )}
+                  className={cn(
+                    "fixed left-20 ml-4 top-auto bg-black/90 backdrop-blur-sm border border-gray-800/50 px-2 py-1 rounded-sm text-xs",
+                    "z-30 opacity-0 invisible translate-x-2 transition-all duration-300 whitespace-nowrap",
+                    "group-hover:opacity-100 group-hover:visible group-hover:translate-x-0",
+                  )}
                   style={{
                     top: "var(--tooltip-y, 50%)",
                     transform: "translateY(-50%)",

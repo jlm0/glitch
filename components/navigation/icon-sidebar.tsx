@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { usePathname } from "next/navigation"
-import Link from "next/link"
-import { Home, Newspaper, Users, MessageCircle, TrendingUp } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { CyberpunkLogo } from "@/components/cyberpunk-logo"
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { Home, Newspaper, Users, MessageCircle, TrendingUp } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { SohmaLogo } from "@/components/branding/SohmaLogo";
 
 const sidebarIcons = [
   { icon: Home, label: "Home", href: "/home" },
@@ -13,44 +13,45 @@ const sidebarIcons = [
   { icon: Users, label: "Community", href: "/community" },
   { icon: MessageCircle, label: "Chat", href: "/chat" },
   { icon: TrendingUp, label: "Market", href: "/market" },
-]
+];
 
 export function IconSidebar() {
-  const pathname = usePathname()
-  const [hoverIcon, setHoverIcon] = useState<string | null>(null)
-  const [logoHover, setLogoHover] = useState(false)
-  const [showBorderAnimation, setShowBorderAnimation] = useState(false)
+  const pathname = usePathname();
+  const [hoverIcon, setHoverIcon] = useState<string | null>(null);
+  const [logoHover, setLogoHover] = useState(false);
+  const [showBorderAnimation, setShowBorderAnimation] = useState(false);
 
   // Occasionally show the border animation
   useEffect(() => {
     const triggerAnimation = () => {
-      setShowBorderAnimation(true)
+      setShowBorderAnimation(true);
 
       // Hide animation after it completes
       setTimeout(() => {
-        setShowBorderAnimation(false)
-      }, 8000) // Animation duration
-    }
+        setShowBorderAnimation(false);
+      }, 8000); // Animation duration
+    };
 
     // Initial delay before first animation
     const initialDelay = setTimeout(() => {
-      triggerAnimation()
+      triggerAnimation();
 
       // Set up interval for occasional animations
       const intervalId = setInterval(() => {
-        triggerAnimation()
-      }, 38000) // Trigger every 38 seconds (different timing for variety)
+        triggerAnimation();
+      }, 38000); // Trigger every 38 seconds (different timing for variety)
 
-      return () => clearInterval(intervalId)
-    }, 15000) // Start after other animations
+      return () => clearInterval(intervalId);
+    }, 15000); // Start after other animations
 
-    return () => clearTimeout(initialDelay)
-  }, [])
+    return () => clearTimeout(initialDelay);
+  }, []);
 
   return (
     <div
-      className={`w-16 h-full bg-black/80 backdrop-blur-sm border-r border-gray-800/30 flex flex-col items-center py-0 z-20 relative border-pulse-animation border-pulse-vertical ${showBorderAnimation ? "active" : ""}`}
-    >
+      className={`w-16 h-full bg-black/80 backdrop-blur-sm border-r border-gray-800/30 flex flex-col items-center py-0 z-20 relative border-pulse-animation border-pulse-vertical ${
+        showBorderAnimation ? "active" : ""
+      }`}>
       {/* Noise overlay for sidebar */}
       <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-5 pointer-events-none"></div>
 
@@ -61,10 +62,9 @@ export function IconSidebar() {
       <div
         className="w-full h-16 flex justify-center items-center border-b border-gray-800/30 relative"
         onMouseEnter={() => setLogoHover(true)}
-        onMouseLeave={() => setLogoHover(false)}
-      >
+        onMouseLeave={() => setLogoHover(false)}>
         <Link href="/home">
-          <CyberpunkLogo isHovering={logoHover} />
+          <SohmaLogo isHovering={logoHover} />
         </Link>
       </div>
 
@@ -76,21 +76,19 @@ export function IconSidebar() {
             className="relative group"
             onMouseEnter={() => setHoverIcon(item.label)}
             onMouseLeave={() => setHoverIcon(null)}
-            aria-label={item.label}
-          >
+            aria-label={item.label}>
             {/* Icon container with hover and active effects */}
             <div
               className={cn(
                 "w-10 h-10 flex items-center justify-center rounded-md transition-all duration-300 relative",
                 pathname === item.href
                   ? "bg-gray-900/30 text-white shadow-[0_0_10px_rgba(255,255,255,0.2)]"
-                  : "text-gray-500 hover:text-gray-300",
-              )}
-            >
+                  : "text-gray-500 hover:text-gray-300"
+              )}>
               <item.icon
                 className={cn(
                   "w-5 h-5 transition-all duration-300",
-                  hoverIcon === item.label && pathname !== item.href && "scale-110",
+                  hoverIcon === item.label && pathname !== item.href && "scale-110"
                 )}
               />
 
@@ -114,14 +112,13 @@ export function IconSidebar() {
                 "absolute left-14 top-1/2 -translate-y-1/2 bg-black/80 backdrop-blur-sm border border-gray-800/50 px-3 py-1 rounded-sm text-xs font-mono",
                 "opacity-0 invisible translate-x-2 transition-all duration-300 whitespace-nowrap z-50",
                 "before:absolute before:top-1/2 before:-left-1 before:-translate-y-1/2 before:w-2 before:h-2 before:bg-black/80 before:rotate-45 before:border-l before:border-b before:border-gray-800/50",
-                hoverIcon === item.label ? "opacity-100 visible translate-x-0" : "",
-              )}
-            >
+                hoverIcon === item.label ? "opacity-100 visible translate-x-0" : ""
+              )}>
               <span className="text-white">{item.label}</span>
             </div>
           </Link>
         ))}
       </div>
     </div>
-  )
+  );
 }

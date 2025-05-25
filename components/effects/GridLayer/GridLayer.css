@@ -1,0 +1,24 @@
+.grid-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-size: 20px 20px;
+}
+
+.grid-white {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 1) 1px, transparent 1px);
+}
+
+.grid-green {
+  background-image: 
+    linear-gradient(to right, rgba(0, 255, 0, 1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 255, 0, 1) 1px, transparent 1px);
+}
+
+.grid-blue {
+  background-image: 
+    linear-gradient(to right, rgba(0, 255, 255, 1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 255, 255, 1) 1px, transparent 1px);
+}

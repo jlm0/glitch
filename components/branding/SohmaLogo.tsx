@@ -1,19 +1,17 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { GlitchText } from "@/components/effects/GlitchText/GlitchText"
-import { NoiseLayer } from "@/components/effects/NoiseLayer"
-import { ScanlineLayer } from "@/components/effects/ScanlineLayer/ScanlineLayer"
+import { useState } from "react";
+import { GlitchText } from "@/components/effects";
+import { NoiseLayer, ScanlineLayer } from "@/components/effects";
 
 export function SohmaLogo() {
-  const [isHovering, setIsHovering] = useState(false)
+  const [isHovering, setIsHovering] = useState(false);
 
   return (
     <div
       className="w-10 h-10 relative cursor-pointer"
       onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
-    >
+      onMouseLeave={() => setIsHovering(false)}>
       {/* Blurred gradient background */}
       <div className="absolute -inset-1 bg-gradient-to-r from-white/20 to-gray-500/20 rounded-md blur-sm" />
 
@@ -24,12 +22,18 @@ export function SohmaLogo() {
           <div className="absolute inset-0 bg-black/80" />
 
           {/* Modular effects */}
-          <NoiseLayer opacity={0.1} animated={isHovering} />
+          <NoiseLayer
+            opacity={0.1}
+            animated={isHovering}
+          />
           {isHovering && <ScanlineLayer opacity={0.03} />}
 
           {/* Letter S with glitch effect */}
           <div className="z-10 text-xl font-bold">
-            <GlitchText intensity={isHovering ? "normal" : "subtle"} triggerOnHover={false} className="text-white">
+            <GlitchText
+              intensity={isHovering ? "normal" : "subtle"}
+              triggerOnHover={false}
+              className="text-white">
               S
             </GlitchText>
           </div>
@@ -50,5 +54,5 @@ export function SohmaLogo() {
         </div>
       </div>
     </div>
-  )
+  );
 }

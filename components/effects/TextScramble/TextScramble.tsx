@@ -1,7 +1,9 @@
+// components/text-effects/TextScramble/TextScramble.tsx
 "use client"
 
 import { useState, useEffect } from "react"
 import { cn } from "@/lib/utils"
+import './TextScramble.css'
 
 interface TextScrambleProps {
   text: string
@@ -9,12 +11,13 @@ interface TextScrambleProps {
   scrambleInterval?: number // How often to trigger the scramble effect (ms)
   scrambleDuration?: number // How long the scramble effect lasts (ms)
   glitchIntensity?: number // For glitch mode: how many letters to scramble (0-1)
+  autoStart?: boolean // Whether to start scrambling automatically
 }
 
 enum ScrambleMode {
-  FULL = 'full',        // Progressive scramble (current behavior)
-  GLITCH = 'glitch',    // Only scramble a few random letters
-  COMPLETE = 'complete' // Scramble all letters at once then restore
+  FULL = "full", // Progressive scramble (current behavior)
+  GLITCH = "glitch", // Only scramble a few random letters
+  COMPLETE = "complete", // Scramble all letters at once then restore
 }
 
 export function TextScramble({
@@ -23,6 +26,7 @@ export function TextScramble({
   scrambleInterval = 8000, // Default: trigger every 8 seconds
   scrambleDuration = 1500, // Default: scramble for 1.5 seconds
   glitchIntensity = 0.3, // Default: scramble 30% of letters in glitch mode
+  autoStart = true,
 }: TextScrambleProps) {
   const [displayText, setDisplayText] = useState(text)
   const [isScrambling, setIsScrambling] = useState(false)
@@ -34,6 +38,8 @@ export function TextScramble({
     // Set initial text
     setDisplayText(text)
 
+    if (!autoStart) return
+
     // Do a full scramble on mount
     setTimeout(() => {
       scrambleText(ScrambleMode.FULL)
@@ -44,7 +50,7 @@ export function TextScramble({
       // Randomly choose scramble mode with weighted probabilities
       const rand = Math.random()
       let mode: ScrambleMode
-      
+
       if (rand < 0.5) {
         mode = ScrambleMode.GLITCH // 50% chance
       } else if (rand < 0.8) {
@@ -57,7 +63,7 @@ export function TextScramble({
     }, scrambleInterval)
 
     return () => clearInterval(intervalId)
-  }, [text, scrambleInterval])
+  }, [text, scrambleInterval, autoStart])
 
   const scrambleText = (mode: ScrambleMode = ScrambleMode.FULL) => {
     if (isScrambling) return // Prevent overlapping scrambles
@@ -76,7 +82,7 @@ export function TextScramble({
   const glitchScramble = () => {
     const numLettersToScramble = Math.floor(text.length * glitchIntensity)
     const lettersToScramble = new Set<number>()
-    
+
     // Randomly select letters to scramble
     while (lettersToScramble.size < numLettersToScramble) {
       lettersToScramble.add(Math.floor(Math.random() * text.length))
@@ -120,8 +126,8 @@ export function TextScramble({
         setDisplayText(() => {
           let newText = ""
           for (let i = 0; i < text.length; i++) {
-            if (text[i] === ' ') {
-              newText += ' ' // Keep spaces
+            if (text[i] === " ") {
+              newText += " " // Keep spaces
             } else {
               newText += chars[Math.floor(Math.random() * chars.length)]
             }
@@ -138,8 +144,8 @@ export function TextScramble({
           for (let i = 0; i < text.length; i++) {
             if (i < restoreIndex) {
               newText += text[i]
-            } else if (text[i] === ' ') {
-              newText += ' '
+            } else if (text[i] === " ") {
+              newText += " "
             } else {
               newText += chars[Math.floor(Math.random() * chars.length)]
             }
@@ -193,5 +199,13 @@ export function TextScramble({
     }, 30)
   }
 
-  return <span className={cn(className, isScrambling && "text-scramble-active")}>{displayText}</span>
+  return (
+    <span className={cn(
+      'text-scramble',
+      isScrambling && 'text-scramble-active',
+      className
+    )}>
+      {displayText}
+    </span>
+  )
 }
