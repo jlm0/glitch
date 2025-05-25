@@ -1,5 +1,5 @@
 // Export all effect components
-export { NoiseLayer } from "./NoiseLayer/NoiseLayer"
+export { NoiseLayer } from "./NoiseLayer"
 export { ScanlineLayer } from "./ScanlineLayer/ScanlineLayer"
 export { GridLayer } from "./GridLayer/GridLayer"
 export { AnimatedLinesLayer } from "./AnimatedLinesLayer/AnimatedLinesLayer"

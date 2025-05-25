@@ -3,7 +3,10 @@
 
 import { useState, useEffect, useRef, useCallback } from "react"
 import { cn } from "@/lib/utils"
-import { TextScramble, GlitchText, NoiseLayer, ScanlineLayer } from "@/components/effects"
+import { TextScramble } from "@/components/effects/TextScramble/TextScramble"
+import { GlitchText } from "@/components/effects/GlitchText/GlitchText"
+import { NoiseLayer } from "@/components/effects/NoiseLayer"
+import { ScanlineLayer } from "@/components/effects/ScanlineLayer/ScanlineLayer"
 import "./LoadingIndicator.css"
 
 interface LoadingIndicatorProps {

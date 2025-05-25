@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { GlitchText } from "@/components/effects/GlitchText/GlitchText"
-import { NoiseLayer } from "@/components/effects/NoiseLayer/NoiseLayer"
+import { NoiseLayer } from "@/components/effects/NoiseLayer"
 import { ScanlineLayer } from "@/components/effects/ScanlineLayer/ScanlineLayer"
 
 export function SohmaLogo() {
