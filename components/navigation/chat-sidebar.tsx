@@ -58,7 +58,7 @@ export function ChatSidebar() {
 
   return (
     <SidebarProvider>
-      <Sidebar className="w-64 bg-black/80 border-r border-gray-500/30" collapsible={false}>
+      <Sidebar className="w-64 shrink-0 bg-black/80 border-r border-gray-500/30" collapsible={false}>
         <SidebarHeader className="p-0">
           <div className="p-3 border-b border-gray-500/30">
             <div className="relative">
