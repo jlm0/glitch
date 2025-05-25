@@ -3,6 +3,10 @@ import type { Metadata } from "next"
 import { Orbitron, Roboto_Mono } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { NoiseLayer } from "@/components/effects/NoiseLayer"
+import { GridLayer } from "@/components/effects/GridLayer/GridLayer"
+import { AnimatedLinesLayer } from "@/components/effects/AnimatedLinesLayer/AnimatedLinesLayer"
+import { ScanlineLayer } from "@/components/effects/ScanlineLayer/ScanlineLayer"
 
 // Define fonts
 const orbitron = Orbitron({
