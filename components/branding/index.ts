@@ -1,1 +1,0 @@
-export { SohmaLogo } from "./SohmaLogo"

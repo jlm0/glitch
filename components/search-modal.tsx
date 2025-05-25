@@ -27,6 +27,7 @@ export function SearchModal() {
   const [glitchEffect, setGlitchEffect] = useState(false)
   const [hoverClose, setHoverClose] = useState(false)
 
+
   // Close on escape key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

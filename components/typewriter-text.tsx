@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef, useCallback } from "react"
 import { cn } from "@/lib/utils"
-import './TypewriterText.css'
 
 interface TypewriterTextProps {
   text: string
@@ -16,13 +15,12 @@ interface TypewriterTextProps {
   showCursor?: boolean
   startDelay?: number // Delay before starting to type
   resetTrigger?: boolean // Prop to trigger restart
-  cursorStyle?: 'blink' | 'solid' | 'pulse'
 }
 
-export function TypewriterText({
-  text,
-  speed = 50,
-  className,
+export function TypewriterText({ 
+  text, 
+  speed = 50, 
+  className, 
   onComplete,
   onType,
   variableSpeed = true,
@@ -30,15 +28,14 @@ export function TypewriterText({
   cursorChar = "_",
   showCursor = true,
   startDelay = 0,
-  resetTrigger = false,
-  cursorStyle = 'blink',
+  resetTrigger = false
 }: TypewriterTextProps) {
   const [displayedText, setDisplayedText] = useState("")
   const [currentIndex, setCurrentIndex] = useState(0)
   const [cursorVisible, setCursorVisible] = useState(true)
   const [isTyping, setIsTyping] = useState(false)
   const [isComplete, setIsComplete] = useState(false)
-
+  
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
   const cursorTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
@@ -61,31 +58,28 @@ export function TypewriterText({
   }, [resetTrigger, reset])
 
   // Calculate dynamic speed based on character
-  const getTypingSpeed = useCallback(
-    (char: string, baseSpeed: number) => {
-      let finalSpeed = baseSpeed
-
-      if (variableSpeed) {
-        // Add random variation (±20%)
-        const variation = (Math.random() - 0.5) * 0.4
-        finalSpeed = baseSpeed * (1 + variation)
+  const getTypingSpeed = useCallback((char: string, baseSpeed: number) => {
+    let finalSpeed = baseSpeed
+    
+    if (variableSpeed) {
+      // Add random variation (±20%)
+      const variation = (Math.random() - 0.5) * 0.4
+      finalSpeed = baseSpeed * (1 + variation)
+    }
+    
+    if (pauseOnPunctuation) {
+      // Longer pauses for punctuation
+      if (['.', '!', '?'].includes(char)) {
+        finalSpeed *= 4 // 4x longer pause
+      } else if ([',', ';', ':'].includes(char)) {
+        finalSpeed *= 2 // 2x longer pause
+      } else if (char === ' ') {
+        finalSpeed *= 0.8 // Slightly faster for spaces
       }
-
-      if (pauseOnPunctuation) {
-        // Longer pauses for punctuation
-        if ([".", "!", "?"].includes(char)) {
-          finalSpeed *= 4 // 4x longer pause
-        } else if ([",", ";", ":"].includes(char)) {
-          finalSpeed *= 2 // 2x longer pause
-        } else if (char === " ") {
-          finalSpeed *= 0.8 // Slightly faster for spaces
-        }
-      }
-
-      return finalSpeed
-    },
-    [variableSpeed, pauseOnPunctuation],
-  )
+    }
+    
+    return finalSpeed
+  }, [variableSpeed, pauseOnPunctuation])
 
   // Main typing effect
   useEffect(() => {
@@ -98,16 +92,16 @@ export function TypewriterText({
 
     const startTyping = () => {
       setIsTyping(true)
-
+      
       const typeNextCharacter = () => {
         if (currentIndex < text.length) {
           const char = text[currentIndex]
           const typingSpeed = getTypingSpeed(char, speed)
-
+          
           timeoutRef.current = setTimeout(() => {
-            setDisplayedText((prev) => prev + char)
-            setCurrentIndex((prev) => prev + 1)
-
+            setDisplayedText(prev => prev + char)
+            setCurrentIndex(prev => prev + 1)
+            
             // Trigger onType callback for sound effects
             if (onType) onType()
           }, typingSpeed)
@@ -131,17 +125,16 @@ export function TypewriterText({
 
   // Cursor blinking effect - only blinks when not typing
   useEffect(() => {
-    if (!showCursor || cursorStyle === 'solid') return
+    if (!showCursor) return
 
     const blinkCursor = () => {
-      // If typing, keep cursor solid, otherwise animate based on style
+      // If typing, keep cursor solid, otherwise blink
       if (isTyping && !isComplete) {
         setCursorVisible(true)
         cursorTimeoutRef.current = setTimeout(blinkCursor, 50)
       } else {
-        setCursorVisible((prev) => !prev)
-        const blinkSpeed = cursorStyle === 'pulse' ? 300 : 500
-        cursorTimeoutRef.current = setTimeout(blinkCursor, blinkSpeed)
+        setCursorVisible(prev => !prev)
+        cursorTimeoutRef.current = setTimeout(blinkCursor, 500)
       }
     }
 
@@ -150,7 +143,7 @@ export function TypewriterText({
     return () => {
       if (cursorTimeoutRef.current) clearTimeout(cursorTimeoutRef.current)
     }
-  }, [isTyping, isComplete, showCursor, cursorStyle])
+  }, [isTyping, isComplete, showCursor])
 
   // Cleanup on unmount
   useEffect(() => {
@@ -161,19 +154,20 @@ export function TypewriterText({
   }, [])
 
   return (
-    <div
-      className={cn(
-        "typewriter-container",
-        className
-      )}
+    <div 
+      className={cn("font-mono", className)}
+      style={{
+        minHeight: '1.2em' // Prevent layout shift
+      }}
     >
-      <span className="typewriter-text">{displayedText}</span>
+      <span>{displayedText}</span>
       {showCursor && (
-        <span className={cn(
-          "typewriter-cursor",
-          `cursor-${cursorStyle}`,
-          cursorStyle === 'solid' ? 'opacity-100' : (cursorVisible ? 'opacity-100' : 'opacity-0')
-        )}>
+        <span 
+          className={cn(
+            "ml-1 transition-opacity duration-100",
+            cursorVisible ? "opacity-100" : "opacity-0"
+          )}
+        >
           {cursorChar}
         </span>
       )}

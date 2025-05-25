@@ -1,5 +1,5 @@
 import type React from "react"
-import { CommunitySidebar } from "@/components/navigation/community-sidebar"
+import { CommunitySidebar } from "@/components/community-sidebar"
 
 export default function CommunityLayout({ children }: { children: React.ReactNode }) {
   return (

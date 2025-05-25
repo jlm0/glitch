@@ -1,5 +1,0 @@
-export { AppSidebar } from "./app-sidebar"
-export { IconSidebar } from "./icon-sidebar"
-export { TopBar } from "./top-bar"
-export { CommunitySidebar } from "./community-sidebar"
-export { ChatSidebar } from "./chat-sidebar"

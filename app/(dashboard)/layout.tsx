@@ -1,11 +1,13 @@
 import type React from "react"
-import { IconSidebar } from "@/components/navigation/icon-sidebar"
-import { TopBar } from "@/components/navigation/top-bar"
+import { IconSidebar } from "@/components/icon-sidebar"
+import { TopBar } from "@/components/top-bar"
+import { NoiseBackground } from "@/components/noise-background"
+import { Scanlines } from "@/components/scanlines"
 import { UserProvider } from "@/contexts/user-context"
 import { SearchProvider } from "@/contexts/search-context"
 import { WalletProvider } from "@/contexts/wallet-context"
-import { SearchModal } from "@/components/features/search-modal"
-import { WalletDrawer } from "@/components/features/wallet-drawer"
+import { SearchModal } from "@/components/search-modal"
+import { WalletDrawer } from "@/components/wallet-drawer"
 import { Suspense } from "react"
 import { NotificationProvider } from "@/contexts/notification-context"
 
@@ -20,6 +22,8 @@ export default function DashboardLayout({
         <WalletProvider>
           <NotificationProvider>
             <div className="relative w-full h-screen overflow-hidden">
+              <NoiseBackground />
+              <Scanlines />
               <Suspense fallback={null}>
                 <SearchModal />
               </Suspense>

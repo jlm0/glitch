@@ -1,14 +1,14 @@
 "use client"
 
 import { usePathname } from "next/navigation"
-import { AccountButton } from "@/components/auth/account-button"
+import { AccountButton } from "@/components/account-button"
 import { useState, useEffect } from "react"
 import { Search, Wallet, Bell } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useSearch } from "@/contexts/search-context"
 import { useWallet } from "@/contexts/wallet-context"
 import { useNotifications } from "@/contexts/notification-context"
-import { NotificationDropdown } from "@/components/features/notification-dropdown"
+import { NotificationDropdown } from "@/components/notification-dropdown"
 
 export function TopBar() {
   const pathname = usePathname()
