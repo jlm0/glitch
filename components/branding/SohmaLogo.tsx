@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { GlitchText } from "@/components/effects";
-import { NoiseLayer, ScanlineLayer } from "@/components/effects";
+import { NoiseLayer } from "../effects/NoiseLayer/NoiseLayer";
+import { GlitchText } from "../effects/GlitchText/GlitchText";
+import { ScanlineLayer } from "../effects/ScanlineLayer/ScanlineLayer";
 
 export function SohmaLogo() {
   const [isHovering, setIsHovering] = useState(false);

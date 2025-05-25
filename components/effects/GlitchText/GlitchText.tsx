@@ -1,6 +1,5 @@
 import React from "react";
 import { cn } from "@/lib/utils";
-import "./GlitchText.css";
 
 interface GlitchTextProps {
   children: React.ReactNode;

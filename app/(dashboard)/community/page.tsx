@@ -1,4 +1,5 @@
-import { GlitchText, TextScramble } from "@/components/effects";
+import { GlitchText } from "@/components/effects/GlitchText/GlitchText";
+import { TextScramble } from "@/components/effects/TextScramble/TextScramble";
 
 export default function CommunityPage() {
   return (

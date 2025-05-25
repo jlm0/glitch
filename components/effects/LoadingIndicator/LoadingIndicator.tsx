@@ -3,8 +3,11 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { cn } from "@/lib/utils";
-import { NoiseLayer, ScanlineLayer, TextScramble, GlitchText } from "@/components/effects";
 import "./LoadingIndicator.css";
+import { NoiseLayer } from "../NoiseLayer/NoiseLayer";
+import { ScanlineLayer } from "../ScanlineLayer/ScanlineLayer";
+import { TextScramble } from "../TextScramble/TextScramble";
+import { GlitchText } from "../GlitchText/GlitchText";
 
 interface LoadingIndicatorProps {
   progress?: number; // 0-100, -1 for indeterminate

@@ -1,4 +1,5 @@
-import { GlitchText, TextScramble } from "@/components/effects";
+import { GlitchText } from "@/components/effects/GlitchText/GlitchText";
+import { TextScramble } from "@/components/effects/TextScramble/TextScramble";
 
 export default function CommunityDetailPage({ params }: { params: { communityId: string } }) {
   // Mock community data - in a real app, you would fetch this based on the communityId

@@ -2,7 +2,6 @@
 
 import type React from "react";
 import { useState, useEffect } from "react";
-import { TextScramble, TypewriterText, GlitchText, LoadingIndicator } from "@/components/effects";
 import { cn } from "@/lib/utils";
 import { GoogleIcon } from "@/components/icons/google-icon";
 import { XIcon } from "@/components/icons/x-icon";
@@ -11,6 +10,10 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, AlertCircle } from "lucide-react";
+import { LoadingIndicator } from "@/components/effects/LoadingIndicator/LoadingIndicator";
+import { TypewriterText } from "@/components/effects/TypewriterText/TypewriterText";
+import { TextScramble } from "@/components/effects/TextScramble/TextScramble";
+import { GlitchText } from "@/components/effects/GlitchText/GlitchText";
 
 export default function AuthPage() {
   const router = useRouter();
