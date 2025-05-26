@@ -5,7 +5,7 @@ export default function CommunityLayout({ children }: { children: React.ReactNod
   return (
     <div className="flex h-full">
       <CommunitySidebar />
-      <div className="flex-1 h-full">{children}</div>
+      <div className="flex-1 overflow-y-auto">{children}</div>
     </div>
   )
 }
