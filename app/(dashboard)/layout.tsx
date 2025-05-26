@@ -1,18 +1,18 @@
-import type React from "react"
-import { IconSidebar } from "@/components/navigation/icon-sidebar"
-import { TopBar } from "@/components/navigation/top-bar"
-import { UserProvider } from "@/contexts/user-context"
-import { SearchProvider } from "@/contexts/search-context"
-import { WalletProvider } from "@/contexts/wallet-context"
-import { SearchModal } from "@/components/features/search-modal"
-import { WalletDrawer } from "@/components/features/wallet-drawer"
-import { Suspense } from "react"
-import { NotificationProvider } from "@/contexts/notification-context"
+import type React from "react";
+import { AppSidebar } from "@/components/navigation/app-sidebar";
+import { TopBar } from "@/components/navigation/top-bar";
+import { UserProvider } from "@/contexts/user-context";
+import { SearchProvider } from "@/contexts/search-context";
+import { WalletProvider } from "@/contexts/wallet-context";
+import { SearchModal } from "@/components/features/search-modal";
+import { WalletDrawer } from "@/components/features/wallet-drawer";
+import { Suspense } from "react";
+import { NotificationProvider } from "@/contexts/notification-context";
 
 export default function DashboardLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <UserProvider>
@@ -24,7 +24,7 @@ export default function DashboardLayout({
                 <SearchModal />
               </Suspense>
               <div className="flex h-full relative z-10">
-                <IconSidebar />
+                <AppSidebar />
                 <div className="flex-1 flex flex-col w-full">
                   <TopBar />
                   <div className="flex flex-1 overflow-hidden">
@@ -40,5 +40,5 @@ export default function DashboardLayout({
         </WalletProvider>
       </SearchProvider>
     </UserProvider>
-  )
+  );
 }
