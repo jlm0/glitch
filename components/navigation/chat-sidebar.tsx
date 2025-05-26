@@ -4,16 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Users, MessageSquare, Star, Archive, Search, Plus, MoreVertical } from "lucide-react"
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarFooter,
-  SidebarProvider,
-} from "@/components/ui/sidebar"
+// Sidebar components removed
 import { cn } from "@/lib/utils"
 
 // Mock data for chat conversations
@@ -57,10 +48,8 @@ export function ChatSidebar() {
   const [searchQuery, setSearchQuery] = useState("")
 
   return (
-    <SidebarProvider>
-      <Sidebar className="w-64 shrink-0 bg-black/80 border-r border-gray-500/30" collapsible={false}>
-        <SidebarHeader className="p-0">
-          <div className="p-3 border-b border-gray-500/30">
+    <aside className="w-64 shrink-0 bg-black/80 border-r border-gray-500/30 flex flex-col">
+      <div className="p-3 border-b border-gray-500/30">
             <div className="relative">
               <Search className="absolute left-2 top-2.5 h-4 w-4 text-gray-400" />
               <input
@@ -76,10 +65,8 @@ export function ChatSidebar() {
               <span>New Chat</span>
             </button>
           </div>
-        </SidebarHeader>
 
-        <SidebarContent className="p-0">
-          <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent">
+      <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent">
             {chatGroups.map((group) => (
               <div key={group.id} className="py-2">
                 <div className="px-3 flex items-center justify-between text-xs text-gray-400 mb-1">
@@ -93,22 +80,18 @@ export function ChatSidebar() {
                     </button>
                   )}
                 </div>
-
-                <SidebarMenu>
+                <ul className="flex w-full min-w-0 flex-col gap-1">
                   {group.chats.map((chat) => (
-                    <SidebarMenuItem key={chat.id}>
-                      <SidebarMenuButton
-                        asChild
-                        isActive={pathname === `/chat/${chat.id}`}
-                        className="px-3 py-2 h-auto"
+                    <li key={chat.id}>
+                      <Link
+                        href={`/chat/${chat.id}`}
+                        className={cn(
+                          "flex items-center gap-2 text-sm relative group rounded-md px-3 py-2",
+                          pathname === `/chat/${chat.id}`
+                            ? "text-cyan-400 bg-cyan-900/20"
+                            : "text-gray-300 hover:bg-gray-800/30",
+                        )}
                       >
-                        <Link
-                          href={`/chat/${chat.id}`}
-                          className={cn(
-                            "flex items-center gap-2 text-sm relative group",
-                            pathname === `/chat/${chat.id}` ? "text-cyan-400" : "text-gray-300",
-                          )}
-                        >
                           {chat.avatar ? (
                             <div className="relative w-7 h-7">
                               <img
@@ -143,22 +126,19 @@ export function ChatSidebar() {
                               <MoreVertical className="h-4 w-4" />
                             </button>
                           </div>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
+                      </Link>
+                    </li>
                   ))}
 
                   {group.chats.length === 0 && (
                     <div className="px-3 py-2 text-xs text-gray-500 italic">No {group.name.toLowerCase()}</div>
                   )}
-                </SidebarMenu>
+                </ul>
               </div>
             ))}
-          </div>
-        </SidebarContent>
+        </div>
 
-        <SidebarFooter className="p-0">
-          <div className="p-3 border-t border-gray-500/30 flex items-center gap-2">
+      <div className="p-3 border-t border-gray-500/30 flex items-center gap-2">
             <div className="relative">
               <img
                 src="/cyberpunk-avatar.png"
@@ -175,8 +155,6 @@ export function ChatSidebar() {
               <MoreVertical className="h-4 w-4" />
             </button>
           </div>
-        </SidebarFooter>
-      </Sidebar>
-    </SidebarProvider>
+    </aside>
   )
 }
