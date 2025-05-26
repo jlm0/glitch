@@ -2,15 +2,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Plus, Compass } from "lucide-react"
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarProvider,
-} from "@/components/ui/sidebar"
+// Sidebar components removed
 import { cn } from "@/lib/utils"
 
 // Mock data for communities
@@ -82,13 +74,8 @@ export function CommunitySidebar() {
   const activeCommunityId = pathname.split("/")[2]
 
   return (
-    <SidebarProvider>
-      <Sidebar
-        className="relative z-20 w-20 shrink-0 bg-black/80 backdrop-blur-sm border-r border-gray-800/30"
-        collapsible={false}
-      >
-        <SidebarHeader className="p-0">
-          <div className="w-full py-3 flex flex-col items-center gap-2 border-b border-gray-800/30">
+    <aside className="relative z-20 w-20 shrink-0 bg-black/80 backdrop-blur-sm border-r border-gray-800/30 flex flex-col">
+      <div className="w-full py-3 flex flex-col items-center gap-2 border-b border-gray-800/30">
             {/* Add community button */}
             <button
               className="w-10 h-10 flex items-center justify-center rounded-md bg-gray-900/30 text-gray-400 hover:bg-gray-800/40 hover:text-white transition-colors"
@@ -105,17 +92,15 @@ export function CommunitySidebar() {
               <Compass className="h-5 w-5" />
             </button>
           </div>
-        </SidebarHeader>
+        </div>
 
-        <SidebarContent className="p-0 overflow-visible">
-          <div className="flex-1 w-full overflow-y-auto overflow-x-visible py-2 flex flex-col items-center gap-1 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent">
+      <div className="flex-1 w-full overflow-y-auto overflow-x-visible py-2 flex flex-col items-center gap-1 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent">
             {communitySections.map((section) => (
               <div key={section.id} className="w-full flex flex-col items-center gap-1 mb-2">
-                <SidebarMenu>
+                <ul className="flex w-full min-w-0 flex-col gap-1">
                   {section.communities.map((community) => (
-                    <SidebarMenuItem key={community.id} className="flex justify-center">
-                      <SidebarMenuButton asChild isActive={activeCommunityId === community.id} className="p-0 h-auto">
-                        <Link href={`/community/${community.id}`} className="relative group">
+                    <li key={community.id} className="flex justify-center">
+                      <Link href={`/community/${community.id}`} className="relative group p-0">
                           {/* Community icon with active/hover states */}
                           <div
                             className={cn(
@@ -183,15 +168,13 @@ export function CommunitySidebar() {
                             </div>
                           </div>
                         </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
+                      </li>
                   ))}
-                </SidebarMenu>
+                </ul>
               </div>
             ))}
-          </div>
-        </SidebarContent>
-      </Sidebar>
-    </SidebarProvider>
+        </div>
+      </div>
+    </aside>
   )
 }
